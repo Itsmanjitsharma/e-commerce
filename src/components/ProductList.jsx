@@ -1,118 +1,116 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './ProductList.css';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
+
 const products = [
     {
-        id: 1,
-        name: "Leather Handbag",
-        price: 49.99, // Real price
-        offerPrice: 39.99, // Offer price
-        imageUrl: "https://tse1.mm.bing.net/th?id=OIP.ExhBOVjLw4-vX-wn8HxKPwHaGJ&pid=Api&P=0&h=180", // Replace with actual image URL
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        name: "Classic Sunglasses",
-        price: 19.99,
-        offerPrice: 14.99,
-        imageUrl: "https://tse3.mm.bing.net/th?id=OIP.0g4DoZvvGbDLGcPeFSImMQHaE5&pid=Api&P=0&h=180",
-        rating: 4.0,
-    },
-    {
-        id: 3,
-        name: "Stylish Sneakers",
-        price: 39.99,
-        offerPrice: 29.99,
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Black_Converse_sneakers.JPG/1200px-Black_Converse_sneakers.JPG",
-        rating: 3.5,
-    },
-    {
-        id: 4,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 5,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 6,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 7,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 8,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 9,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 10,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
+        id:1,
+        image:"https://owr.life/wp-content/uploads/2023/05/DSC02650-1-600x900.jpg",
+        name:"THE BEGINNING TEE",
+        price:1899.00,
+        description:"In one corner of that never-ending sky, He, who rules all beings, created a cloud. In its shadow, he brought into being a great ocean. The water of that ocean was quite unlike the water of this world. It is from that ocean that this world was made, so it is called the waters of creation. In the coolness of its waters He, who rules, lay down to sleep. While he slept, submerged in the water, he began to breathe deep, regular breaths. Time came into being. Aeons passed",
+        subdescription:[
+          {
+            describe:"100% Cotton Terry Fabric. Premium quality Fabric, 270 gsm."
+          },{
+            describe:"Back- Puff Printing."
+          },{
+            describe:"Front- High-Density Printing"
+          },{
+            describe:"Garment Care: Hand wash in cold water or dry clean only."
+          },{
+            describe:"Color: Black"
+          }
+        ],
+        sizes:[
+          'S','M','L','XL','XXL','3XL'
+        ],
+        images:[{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02650-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02623-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02631-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02632-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02632-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02645-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02636-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02637-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02674-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02671-1.jpg"
+        },{
+          image:"https://owr.life/wp-content/uploads/2023/05/DSC02680-1.jpg"
+        }
+        ],
+        relatedProducts:[
+          {
+            id:2,
+            image:"https://owr.life/wp-content/uploads/2023/08/DSC02570-1-600x900.jpg",
+            name:"THE MAYA TEE",
+            price:1899.00
+        },
+        {
+            id:3,
+            image:"https://owr.life/wp-content/uploads/2023/08/DSC02570-1-600x900.jpg",
+            name:"THE MAYA TEE",
+            price:1899.00
+        },
+        {
+            id:4,
+            image:"https://owr.life/wp-content/uploads/2024/08/owr-va-edit-28-600x900.jpg",
+            name:"Alternate Reality Tshirt",
+            price:1899.00
+        },
+        {
+            id:5,
+            image:"https://owr.life/wp-content/uploads/2024/02/DSC02810-1-600x900.jpg",
+            name:"AHANKAAR T-SHIRT",
+            price:1998.00
+        }
+        ]
     }
-    // Add more products as needed
 ];
 
-const ProductList = () => {
-    const renderStars = (rating) => {
-        const stars = [];
-        for (let i = 1; i <= 5; i++) {
-            stars.push(
-                <span key={i} className={i <= rating ? "star filled" : "star"}>★</span>
-            );
-        }
-        return stars;
-    };
+const ProductList = ({category}) => {
+    const navigate = useNavigate();  // Initialize navigate function
+
+
+    const [productList,setProductList] = useState([]);
+    useEffect(() => {
+       /* axios.get(`http://localhost:5555/getProductList/${category}`)
+        .then((response) => setProductList(response.data))
+        .catch((error) => console.log("An exception occurred", error));*/
+
+        setProductList(products);
+    }, []);
+
+    const handlePageNavigation = (product) => {
+        navigate('/productdetails', { state: { product } });
+      };
 
     return (
+        <div className="product-list-container">
+             <h1>{category}</h1>
+        
         <div className="product-list">
-            {products.map(product => (
-                <div key={product.id} className="product-card">
-                    <img src={product.imageUrl} alt={product.name} className="product-image" />
-                    <div className="product-details-list">
+            {productList.map(product => (
+                <div key={product.id} className="product-card" onClick={() => handlePageNavigation(product)}>
+                    <img src={product.image} alt={product.name} className="product-image" />
                     <h3 className="product-name">{product.name}</h3>
                     <p className="product-price">
-                        <span className="offer-price">${product.offerPrice.toFixed(2)}</span>
-                        <span className="real-price">${product.price.toFixed(2)}</span>
+                        <span className="offer-price">₹{product.price.toFixed(2)}</span>
                     </p>
-                    </div>
-                    <div className="product-details-list">
-                    <div className="product-rating">{renderStars(product.rating)}</div>
-                    <button className="add-to-cart-btn">Add to Cart</button>
-                    </div>
                 </div>
             ))}
+          </div>
         </div>
     );
 };

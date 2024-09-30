@@ -24,7 +24,7 @@ const ProductCard = ({key,prod}) => {
                     </div>
                     <div className="card-product-details-list">
                     <div className="card-product-rating">{renderStars(prod.rating)}</div>
-                    <button className="card-add-to-cart-btn">Add to Cart</button>
+                    <button className="add-to-cart-btn">Add to Cart</button>
                     </div>
                 </div>
     )

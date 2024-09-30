@@ -1,102 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductDetail.css';
 import ProductCard from './ProductCard';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
+
+
 
 const ProductDetail = () => {
-  const [selectedSize, setSelectedSize] = useState('S');
-  const [quantity, setQuantity] = useState(2);
-  const [selectedImage, setSelectedImage] = useState("https://i0.wp.com/www.fashionunlock.com/wp-content/uploads/2019/05/affordable.jpg?w=640&ssl=1");
-  const images = [
-    "https://www.fashionhombre.com/wp-content/uploads/2019/08/Best-Chinos-And-Shirt-Combinations-For-Men-1-1.jpg",
-    "https://tse1.mm.bing.net/th?id=OIP.wTtIOP92UdFm_MNRCpE_wwHaJ4&pid=Api&P=0&h=180",
-    "https://cdna.lystit.com/photos/96d9-2015/04/16/asos-warmgrey-skinny-chinos-in-ankle-grazer-product-2-709332563-normal.jpeg",
-    "https://i.pinimg.com/736x/1e/62/40/1e6240045fb7b5a532997951908518a4.jpg",
-    "https://modone.com/eng_pl_Mens-pants-chinos-P891-light-grey-15236_3.jpg",
-    "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1556814994-chinos-8-1556814933.jpg?crop=1xw:1xh;center,top"
-  ];
+  const location = useLocation();
+  const { product } = location.state || {};  // Destructure the product from state
 
-  const [recommandedProducts, setRecommandedProducts] = useState([
-    {
-        id: 1,
-        name: "Leather Handbag",
-        price: 49.99, // Real price
-        offerPrice: 39.99, // Offer price
-        imageUrl: "https://tse1.mm.bing.net/th?id=OIP.ExhBOVjLw4-vX-wn8HxKPwHaGJ&pid=Api&P=0&h=180", // Replace with actual image URL
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        name: "Classic Sunglasses",
-        price: 19.99,
-        offerPrice: 14.99,
-        imageUrl: "https://tse3.mm.bing.net/th?id=OIP.0g4DoZvvGbDLGcPeFSImMQHaE5&pid=Api&P=0&h=180",
-        rating: 4.0,
-    },
-    {
-        id: 3,
-        name: "Stylish Sneakers",
-        price: 39.99,
-        offerPrice: 29.99,
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Black_Converse_sneakers.JPG/1200px-Black_Converse_sneakers.JPG",
-        rating: 3.5,
-    },
-    {
-        id: 4,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 5,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 6,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 7,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 8,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 9,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    },
-    {
-        id: 10,
-        name: "Summer Hat",
-        price: 29.99,
-        offerPrice: 19.99,
-        imageUrl: "https://img.freepik.com/premium-photo/summer-hat-photo_728472-1212.jpg",
-        rating: 5.0,
-    }
-]);
+  const [detailOfProduct, setDetailOfProduct] = useState(product || {});
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(0);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [recommandedProducts, setRecommandedProducts] = useState([]);
 
 
   const handleSizeSelect = (size) => {
@@ -106,85 +24,101 @@ const ProductDetail = () => {
     setSelectedImage(image);
   };
 
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <span key={i} className={i <= rating ? "star filled" : "star"}>★</span>
-      );
+  useEffect(() => {
+    if (detailOfProduct?.images?.length) {
+      setSelectedImage(detailOfProduct.images[0].image); // Access the image property inside the array
     }
-    return stars;
+  }, [detailOfProduct]);
+
+  const handleIncrement = () => setQuantity(quantity + 1);
+  const handleDecrement = () => setQuantity(quantity > 0 ? quantity - 1 : 0);
+  const navigate = useNavigate();  // Initialize navigate function
+
+  const handlePageNavigation = (product) => {
+    navigate('/productdetails', { state: { product } });
   };
 
+  const handleNevigateToCart = () => {
+    navigate('/cart'); 
+  }
+
   return (
+    <div>
     <div className="container">
-      <div className="product-sub-details">     
-        <div className="product-details-image">
-            {/* Image Thumbnails Section */}
-        <div className="image-thumbnails">
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              onClick={() => handleImageClick(image)}
-              className={selectedImage === image ? "active-thumbnail" : ""}
-            />
-          ))}
-        </div>
+    <div className="left-column">
+      <img src={selectedImage} alt="Main product" />
+      <div className="thumbnail-row">
+        {detailOfProduct.images.map((imageObj) => (
           <img
-            src={selectedImage}
-            alt="Men's Polo T-shirt"
+            src={imageObj.image}
+            alt=""
+            onClick={() => setSelectedImage(imageObj.image)}
           />
-        </div>
-        <div className="product-sub-cart-details">
-          <h2>Men's Polo T-shirt</h2>
-          <div className="reviews">
-            <div className="product-rating">{renderStars(4.5)}</div>
-          </div>
-          <div className="description">
-            Investigaciones demonstraverunt lectores legere me lius quod ii legunt saepius.
-          </div>
-          <div className="price">
-            <span className="old-price">$99.99</span> $69.00
-          </div>
-          <div className="size">
-            <span>Size:</span>
-            {['S', 'M', 'L', 'XL'].map((size) => (
-              <button
-                key={size}
-                className={selectedSize === size ? 'active' : ''}
-                onClick={() => handleSizeSelect(size)}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
-          <div className="quantity">
-            <span>Qty:</span>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-          </div>
-          <div className='productdetail-buttons'>
-          <button className="add-to-cart">ADD TO CART</button>
-          <button className="add-to-cart">Buy Now</button>
-          </div>
-        </div>
-      </div>
-       {/* Recommended Products Section */}
-      <div className="recommended-products">
-        <h2>Recommended Products</h2>
-        <div className="recommended-products-container">
-          {recommandedProducts.map((prod) => (
-            <ProductCard key={prod.id} prod={prod} />
-          ))}
-        </div>
+        ))}
       </div>
     </div>
+    <div className="right-column">
+      <h1>{detailOfProduct.name}</h1>
+      <p className="price">{detailOfProduct.price}</p>
+      <p className="description">
+      {detailOfProduct.description}
+      </p>
+      <a href="#size-chart" className="size-chart">
+        Size Chart
+      </a>
+      <div className="size">
+        <span>Size: {selectedSize}</span>
+      </div>
+      <div className="size-options">
+       {
+        detailOfProduct.sizes.map((size)=>(
+          <button onClick={()=>setSelectedSize(size)}>{size}</button>
+        ))
+       }
+      </div>
+      <div className="quantity-container">
+      <div className="quantity">
+        <button onClick={handleDecrement}>-</button>
+        <input type="text" value={quantity}  />
+        <button onClick={handleIncrement}>+</button>
+      </div>
+
+      <a href="/cart" className="add-to-cart" onClick={handleNevigateToCart}>
+        Add to Cart
+      </a>
+      </div>
+      
+    </div>
+  </div>
+  <div className='product-description-size'>
+  <h4>Description</h4>
+  {Array.isArray(detailOfProduct.subdescription) && detailOfProduct.subdescription.length > 0 ? (
+    detailOfProduct.subdescription.map((item, index) => (
+      <p key={index}>{item.describe}</p>  // Access the 'describe' property
+    ))
+  ) : (
+    <p>No description available.</p>  // Fallback if no descriptions exist
+  )}
+</div>
+  <h3>Related Products</h3>
+  <div className='related_product-container'>
+      {
+        detailOfProduct.relatedProducts.map((product) => (
+                <div key={product.id} className="product-card" onClick={() => handlePageNavigation(product)}>
+                    <img src={product.image} alt={product.name} className="product-image" />
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-price">
+                        <span className="offer-price">₹{product.price.toFixed(2)}</span>
+                    </p>
+                </div>
+        ))
+      }
+    </div>
+  </div>
   );
 };
 
 export default ProductDetail;
+
+
+

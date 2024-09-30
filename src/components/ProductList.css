@@ -1,86 +1,51 @@
-.product-image{
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-}
-
-
+/* Styling for the product list container */
 .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product-card {
-    /*border: 1px solid #e0e0e0;*/
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    background-color: #ffffff;
-    transition: box-shadow 0.3s;
-}
-
-.product-card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.product-name {
-    font-size: 12px;
-    margin: 10px 0;
-}
-
-.product-price {
-    font-size: 12px;
-    color: #666;
-    margin: 10px 0;
-}
-
-.offer-price {
-    font-weight: bold;
-    color: #E91E63; /* Color for the offer price */
-    margin-right: 5px;
-}
-
-.real-price {
-    text-decoration: line-through; /* Struck-through style for real price */
-    color: #999;
-}
-
-.product-rating {
-    margin: 10px 0;
-}
-
-.star {
-    color: #ccc;
-    font-size: 14px;
-}
-
-.star.filled {
-    color: #FFD700; /* Gold color for filled stars */
-}
-
-.add-to-cart-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.add-to-cart-btn:hover {
-    background-color: #45a049;
-}
-
-.product-details-list{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap; /* Allows products to wrap to the next row */
+    justify-content: flex-start; /* Distributes items evenly across the row */
+    gap: 28px; /* Adds spacing between rows and columns */
+    margin: 0 auto; /* Center the product list on the page */
+    padding: 20px; /* Optional padding around the list */
+}
+
+/* Styling for the individual product card */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    width: 23%; /* 4 items per row: 100% / 4 = 25%, with some space for gaps */
+    margin-bottom: 20px; /* Adds space at the bottom of each card */
+    box-sizing: border-box; /* Ensure padding and borders don't affect the width */
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Add transition for smooth scaling */
+
+}
+.product-card:hover {
+    transform: scale(1.05); /* Scale up to 105% */
+}
+
+/* Ensure the image maintains the aspect ratio */
+.product-card img {
+    width: 100%; /* Full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Crop the image to fit the container */
+}
+.product-card h3{
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   margin: 0px;
+   padding: 0px;
+}
+.product-card span{
+    display: flex;
     align-items: center;
+    justify-content: flex-start;
+    margin: 0px;
+    padding: 0px;
+}
+
+.product-list-container h1{
+    margin: 0px;
+    padding: 0px;
+
 }

@@ -1,54 +1,92 @@
+/* Main header styling */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 30px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header-logo h1 {
-    font-size: 24px;
-    color: #000;
-  }
-  
-  .header-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .header-nav ul li {
-    margin-left: 20px;
-  }
-  
-  .header-nav ul li a {
-    text-decoration: none;
-    color: #666;
-    font-size: 16px;
-    transition: color 0.3s;
-  }
-  
-  .header-nav ul li a:hover {
-    color: #000;
-  }
-  
-  .header-icons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .icon {
-    font-size: 24px;
-    color: #666;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  .icon:hover {
-    color: #000;
-  }
-  
+  background-color: #000;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+/* Flex container for header logo, title, and icons */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  background-color: #000;
+}
+
+/* Logo icon styling */
+.header-logo-icon {
+  color: #fff;
+  font-size: 18px; /* Adjust the size as needed */
+}
+
+/* Title and subtitle styling */
+.header-container h1 {
+  font-size: 50px;
+  color: #fff;
+  margin: 0;
+}
+
+.header-container span {
+  color: #fff;
+  font-size: 14px;
+  display: block;
+}
+
+/* Icon section */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon {
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #ccc;
+}
+
+/* Category navigation bar */
+.categories {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
+  background-color: #111;
+  border-top: 1px solid #fff;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.categories ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories ul li {
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.categories ul li:hover{
+  padding: 10px;
+  background-color: #fff; /* Change background to white */
+  color: #000; /* Change text to black */
+  transition: all 0.3s; /* Smooth transition for color and background */
+}
+
+.headersLink{
+  cursor: pointer;
+}

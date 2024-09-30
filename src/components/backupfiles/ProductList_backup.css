@@ -1,60 +1,70 @@
-.card-product-details-list{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.product-image{
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
 }
-.card-product-card {
+
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
     /*border: 1px solid #e0e0e0;*/
     border-radius: 8px;
     padding: 10px;
     text-align: center;
     background-color: #ffffff;
     transition: box-shadow 0.3s;
-    width: 200px;
-    cursor: pointer;
 }
 
-.card-product-card:hover {
+.product-card:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-product-name {
+.product-name {
     font-size: 12px;
     margin: 10px 0;
 }
 
-.card-product-price {
+.product-price {
     font-size: 12px;
     color: #666;
     margin: 10px 0;
 }
 
-.card-offer-price {
+.offer-price {
     font-weight: bold;
     color: #E91E63; /* Color for the offer price */
     margin-right: 5px;
 }
 
-.card-real-price {
+.real-price {
     text-decoration: line-through; /* Struck-through style for real price */
     color: #999;
 }
 
-.card-product-rating {
+.product-rating {
     margin: 10px 0;
 }
 
-.card-star {
+.star {
     color: #ccc;
     font-size: 14px;
 }
 
-.card-star.filled {
+.star.filled {
     color: #FFD700; /* Gold color for filled stars */
 }
 
-.card-add-to-cart-btn {
+.add-to-cart-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -64,16 +74,13 @@
     transition: background-color 0.3s;
 }
 
-.card-add-to-cart-btn:hover {
+.add-to-cart-btn:hover {
     background-color: #45a049;
 }
 
-.card-product-image{
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+.product-details-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
